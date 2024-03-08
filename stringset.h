@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include <string>
@@ -7,21 +5,19 @@
 #include <list>
 using namespace std;
 
-//Stringset class, do not modify definitions for existing members
 class Stringset
 {
     private:
-        vector<list<string>> table;
-        int num_elems;
-        int size;
+        vector<list<string>> table; // Hash table to store strings
+        int num_elems; // Number of elements in the table
+        int size; // Size of the hash table
+
     public:
-        Stringset();
-        vector<list<string>> getTable() const;
-        int getNumElems() const;
-        int getSize() const;
-        void insert(string word);
-        bool find(string word) const;
-        void remove(string word);
-
-
+        Stringset(); // Constructor
+        vector<list<string>> getTable() const; // Get the hash table
+        int getNumElems() const; // Get the number of elements in the set
+        int getSize() const; // Get the size of the hash table
+        void insert(string word); // Insert a word into the set
+        bool find(string word) const; // Check if a word is in the set
+        void remove(string word); // Remove a word from the set
 };
