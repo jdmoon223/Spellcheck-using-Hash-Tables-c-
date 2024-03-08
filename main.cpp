@@ -1,44 +1,43 @@
+#include <functional>
+#include "stringset.h"
+#include <iostream>
+#include <fstream>
 
- #include <functional>
- #include "stringset.h"
- #include <iostream>
- #include <fstream>
- 
- void testStringset(Stringset& words);
- void loadStringset(Stringset& words, string filename);
- vector<string> spellcheck(const Stringset& words, string word);
- 
-  int main()
- {
-     Stringset wordlist;
-     testStringset(wordlist);
-     return 0;
- }
- 
+// Function prototypes
+void testStringset(Stringset& words);
+void loadStringset(Stringset& words, string filename);
+vector<string> spellcheck(const Stringset& words, string word);
 
- 
- void testStringset(Stringset& words)
- {
-     string choice;
-     string word;
-     do
-     {
-         cout << "I: insert word" << endl;
-         cout << "F: find word" << endl;
-         cout << "R: remove word" << endl;
-         cout << "P: print words in stringset" << endl;
-         cout << "Q: quit" << endl;
-         cin >> choice;
-         switch (choice[0])
-         {
-             case 'I':
-             case 'i':
+int main()
+{
+    Stringset wordlist;
+    testStringset(wordlist);
+    return 0;
+}
+
+// Function to test the Stringset class
+void testStringset(Stringset& words)
+{
+    string choice;
+    string word;
+    do
+    {
+        cout << "I: insert word" << endl;
+        cout << "F: find word" << endl;
+        cout << "R: remove word" << endl;
+        cout << "P: print words in stringset" << endl;
+        cout << "Q: quit" << endl;
+        cin >> choice;
+        switch (choice[0])
+        {
+            case 'I':
+            case 'i':
                 cout << "Enter word to insert: ";
                 cin >> word;
                 words.insert(word);
                 break;
-             case 'F':
-             case 'f':
+            case 'F':
+            case 'f':
                 cout << "Enter word to find: ";
                 cin >> word;
                 if (words.find(word))
@@ -50,14 +49,14 @@
                     cout << word << " not in stringset" << endl;
                 }
                 break;
-             case 'R':
-             case 'r':
+            case 'R':
+            case 'r':
                 cout << "Enter word to remove: ";
                 cin >> word;
                 words.remove(word);
                 break;
-             case 'P':
-             case 'p':
+            case 'P':
+            case 'p':
                 vector<list<string>> t = words.getTable();
                 int numWords = words.getNumElems();
                 int tSize = words.getSize();
@@ -70,21 +69,23 @@
                     }
                 }
                 cout << "Words: " << numWords << endl;
-         }
-     } while (choice[0] != 'Q' && choice[0] != 'q');
- }
- 
- void loadStringset(Stringset& words, string filename)
- {
-std::ifstream infile(filename);
-std::string word;
-while(std::getline(infile, word)){
-    words.insert(word);
+        }
+    } while (choice[0] != 'Q' && choice[0] != 'q');
 }
+
+// Function to load words from a file into the Stringset
+void loadStringset(Stringset& words, string filename)
+{
+    std::ifstream infile(filename);
+    std::string word;
+    while(std::getline(infile, word)){
+        words.insert(word);
+    }
 }
- 
- vector<string> spellcheck(const Stringset& words, string word)
- {
+
+// Function to perform spell check on a word
+vector<string> spellcheck(const Stringset& words, string word)
+{
     std::vector<string> st;
     std::string wordCopy;
     for(int i = 0; i < word.length(); i++){
@@ -94,9 +95,7 @@ while(std::getline(infile, word)){
             if (wordCopy != word && words.find(wordCopy)){
                 st.push_back(wordCopy);
             }
-           
-            
         }
     }
     return st;
- }
+}
